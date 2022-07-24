@@ -19,17 +19,23 @@ const products = [
     price: "$100",
 
     image:
-      "https://www.apple.com/newsroom/images/tile-images/Apple_16-inch-MacBook-Pro_111319.jpg.news_app_ed.jpg",
+      "https://www.laptopsdirect.co.uk/Images/A1MVVJ2BA_1_Supersize.jpg?v=12",
   },
 ];
 
 const Products = () => {
   return (
-    <main sx={{ flexGrow: 1 }}>
+    <main
+      style={{
+        flexGrow: "1",
+        paddingTop: "80px",
+        backgroundColor: "#fafafa",
+      }}
+    >
       <div />
-      <Grid container spacing={2} justifyContent="center" marginTop="100px">
+      <Grid container spacing={2} justifyContent="center">
         {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={2.5}>
+          <Grid item key={product.id} xs={10} sm={6} md={4} lg={2.5}>
             <Product product={product} />
           </Grid>
         ))}
