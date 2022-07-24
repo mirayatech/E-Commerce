@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./Product/Product";
+import Product from "./Product";
 import { Grid } from "@mui/material";
 
 const products = [
