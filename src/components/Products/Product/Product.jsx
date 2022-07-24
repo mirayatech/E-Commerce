@@ -17,13 +17,14 @@ const Product = ({ product }) => {
     <Card sx={{ maxWidth: "100%" }}>
       <CardMedia
         sx={{ height: 0, paddingTop: "56.25%" }}
-        image=""
+        image={product.image}
         title={product.name}
       />
 
       <CardContent>
         <CardContent
           sx={{
+            padding: "0",
             display: "flex",
             justifyContent: "space-between",
           }}
@@ -31,8 +32,7 @@ const Product = ({ product }) => {
           <Typography variant="h5">{product.name}</Typography>
           <Typography variant="h5">{product.price} </Typography>
         </CardContent>
-        <Typography variant="h2" color="textSecondary">
-          {" "}
+        <Typography variant="body2" color="textSecondary">
           {product.description}
         </Typography>
       </CardContent>
