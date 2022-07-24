@@ -1,6 +1,7 @@
 import React from "react";
 import Product from "./Product";
 import { Grid } from "@mui/material";
+import { spacing } from "@mui/system";
 
 const products = [
   {
@@ -24,10 +25,11 @@ const products = [
 
 const Products = () => {
   return (
-    <main>
-      <Grid container spacing={2} justifyContent="center">
+    <main sx={{ flexGrow: 1 }}>
+      <div />
+      <Grid container spacing={2} justifyContent="center" marginTop="100px">
         {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={2.5}>
             <Product product={product} />
           </Grid>
         ))}
