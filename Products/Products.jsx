@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./Product/Product";
+import Product from "../Product/Product";
 import { Grid } from "@mui/material";
 
 const products = [
@@ -13,14 +13,14 @@ const products = [
     id: 2,
     name: "Macbook",
     description: "Apple Macbook",
-    price: "$100",
+    price: "$5",
   },
 ];
 
 const Products = () => {
   return (
     <main>
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container justify="center" spacing={4}>
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
             <Product product={product} />
