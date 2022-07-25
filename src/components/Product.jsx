@@ -11,7 +11,7 @@ import {
 import { AddShoppingCart } from "@mui/icons-material";
 // import useStyles from "./styles";
 
-const Product = ({ product }) => {
+const Product = ({ product, onAddToCart }) => {
   console.log(product);
   // const classes = useStyles();
   return (
@@ -46,7 +46,10 @@ const Product = ({ product }) => {
         disableSpacing
         sx={{ display: "flex", justifyContent: "flex-end" }}
       >
-        <IconButton aria-label="Add to Cart">
+        <IconButton
+          aria-label="Add to Cart"
+          onClick={() => onAddToCart(product.id, 1)}
+        >
           <AddShoppingCart />
         </IconButton>
       </CardActions>

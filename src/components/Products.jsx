@@ -3,7 +3,7 @@ import Product from "./Product";
 import { Grid } from "@mui/material";
 import { spacing } from "@mui/system";
 
-const Products = ({ products }) => {
+const Products = ({ products, onAddToCart }) => {
   return (
     <main
       style={{
@@ -16,7 +16,7 @@ const Products = ({ products }) => {
       <Grid container spacing={2} justifyContent="center">
         {products.map((product) => (
           <Grid item key={product.id} xs={10} sm={6} md={4} lg={2.5}>
-            <Product product={product} />
+            <Product product={product} onAddToCart={onAddToCart} />
           </Grid>
         ))}
       </Grid>
