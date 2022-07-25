@@ -19,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-function Navbar() {
+function Navbar({ totalItems }) {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -58,7 +58,7 @@ function Navbar() {
             />
             <div className="button">
               <IconButton aria-label="Show cart items" color="inherit">
-                <Badge badgeContent={2} color="secondary">
+                <Badge badgeContent={totalItems} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
