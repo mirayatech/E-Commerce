@@ -35,9 +35,11 @@ const Product = ({ product }) => {
             {product.price.formatted_with_symbol}{" "}
           </Typography>
         </CardContent>
-        <Typography variant="body2" color="textSecondary">
-          {product.description}
-        </Typography>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: product.description }}
+          variant="body2"
+          color="textSecondary"
+        ></Typography>
       </CardContent>
 
       <CardActions
