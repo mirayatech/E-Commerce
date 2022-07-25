@@ -3,27 +3,7 @@ import Product from "./Product";
 import { Grid } from "@mui/material";
 import { spacing } from "@mui/system";
 
-const products = [
-  {
-    id: 1,
-    name: "Air Jordan 1",
-    description: "Sneaker shoes",
-    price: "$5",
-    image:
-      "https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2021%2F12%2FAir-Jordan-1-High-Zoom-CMFT-Pink-Oxford-0.jpg?w=960&cbr=1&q=90&fit=max",
-  },
-  {
-    id: 2,
-    name: "Macbook",
-    description: "Apple Macbook",
-    price: "$100",
-
-    image:
-      "https://www.laptopsdirect.co.uk/Images/A1MVVJ2BA_1_Supersize.jpg?v=12",
-  },
-];
-
-const Products = () => {
+const Products = ({ products }) => {
   return (
     <main
       style={{
