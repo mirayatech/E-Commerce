@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Color theme
 const theme = createTheme({
@@ -21,6 +21,8 @@ const theme = createTheme({
 });
 
 export default function Navbar({ totalItems }) {
+  const location = useLocation();
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -46,9 +48,6 @@ export default function Navbar({ totalItems }) {
               color="inherit"
               sx={{
                 fontWeight: "600",
-                flexGrow: 1,
-                alignItems: "center",
-                display: "flex",
                 textDecoration: "none",
               }}
             >
@@ -59,18 +58,20 @@ export default function Navbar({ totalItems }) {
                 flexGrow: 1,
               }}
             />
-            <div className="button">
-              <IconButton
-                component={Link}
-                to="/Cart"
-                aria-label="Show cart items"
-                color="inherit"
-              >
-                <Badge badgeContent={totalItems} color="secondary">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </div>
+            {location.pathname === "/" && (
+              <div className="button">
+                <IconButton
+                  component={Link}
+                  to="/Cart"
+                  aria-label="Show cart items"
+                  color="inherit"
+                >
+                  <Badge badgeContent={totalItems} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
+              </div>
+            )}
           </Toolbar>
         </AppBar>
       </ThemeProvider>
