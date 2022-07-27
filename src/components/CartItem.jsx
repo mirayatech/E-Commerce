@@ -18,7 +18,7 @@ const theme = createTheme({
   },
 });
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
   return (
     <ThemeProvider theme={theme}>
       <Card>
@@ -35,15 +35,30 @@ export default function CartItem({ item }) {
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button type="button" size="small" color="primary">
+            <Button
+              type="button"
+              size="small"
+              color="primary"
+              onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+            >
               -
             </Button>
             <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
-            <Button type="button" size="small" color="primary">
+            <Button
+              type="button"
+              size="small"
+              color="primary"
+              onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+            >
               +
             </Button>
           </div>
-          <Button variant="contained" type="button" color="secondary">
+          <Button
+            variant="contained"
+            type="button"
+            color="secondary"
+            onClick={() => onRemoveFromCart(item.id)}
+          >
             Remove
           </Button>
         </CardActions>

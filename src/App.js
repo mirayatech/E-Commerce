@@ -31,7 +31,7 @@ const App = () => {
     setCart(cart);
   };
 
-  const handleEmptyCard = async () => {
+  const handleEmptyCart = async () => {
     const { cart } = await commerce.cart.empty();
     setCart(cart);
   };
@@ -61,7 +61,7 @@ const App = () => {
               cart={cart}
               handleUpdateCartQty={handleUpdateCartQty}
               handleRemoveFromCart={handleRemoveFromCart}
-              handleEmptyCard={handleEmptyCard}
+              handleEmptyCart={handleEmptyCart}
             />
           }
         ></Route>
