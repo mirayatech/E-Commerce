@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { commerce } from "./library/commerce";
 import { Products, Navbar, Cart } from "./components";
 import { Routes, Route } from "react-router-dom";
+import { set } from "react-hook-form";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -17,8 +18,22 @@ const App = () => {
   };
   // Add item to cart
   const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    setCart(item.cart);
+    const { cart } = await commerce.cart.add(productId, quantity);
+    setCart(cart);
+  };
+  const handleUpdateCartQty = async (lineItemId, quantity) => {
+    const { cart } = await commerce.cart.update(lineItemId, { quantity });
+    setCart(cart);
+  };
+
+  const handleRemoveFromCart = async (productId) => {
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+  };
+
+  const handleEmptyCard = async () => {
+    const { cart } = await commerce.cart.empty();
+    setCart(cart);
   };
 
   useEffect(() => {
@@ -39,9 +54,17 @@ const App = () => {
           }
         ></Route>
 
-        <Route path="/cart" element={<Cart cart={cart} />}>
-          {" "}
-        </Route>
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              handleUpdateCartQty={handleUpdateCartQty}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleEmptyCard={handleEmptyCard}
+            />
+          }
+        ></Route>
       </Routes>
     </div>
   );
