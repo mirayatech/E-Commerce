@@ -19,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-function Navbar({ totalItems }) {
+export default function Navbar({ totalItems }) {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -69,5 +69,3 @@ function Navbar({ totalItems }) {
     </>
   );
 }
-
-export default Navbar;

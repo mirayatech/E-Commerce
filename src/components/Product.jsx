@@ -11,8 +11,7 @@ import {
 import { AddShoppingCart } from "@mui/icons-material";
 // import useStyles from "./styles";
 
-const Product = ({ product, onAddToCart }) => {
-  console.log(product);
+export default function Product({ product, onAddToCart }) {
   // const classes = useStyles();
   return (
     <Card sx={{ maxWidth: "100%" }}>
@@ -55,6 +54,4 @@ const Product = ({ product, onAddToCart }) => {
       </CardActions>
     </Card>
   );
-};
-
-export default Product;
+}

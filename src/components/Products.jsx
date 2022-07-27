@@ -1,9 +1,8 @@
 import React from "react";
 import Product from "./Product";
 import { Grid } from "@mui/material";
-import { spacing } from "@mui/system";
 
-const Products = ({ products, onAddToCart }) => {
+export default function Products({ products, onAddToCart }) {
   return (
     <main
       style={{
@@ -22,6 +21,4 @@ const Products = ({ products, onAddToCart }) => {
       </Grid>
     </main>
   );
-};
-
-export default Products;
+}
