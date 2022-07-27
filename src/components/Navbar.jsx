@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 // Color theme
 const theme = createTheme({
@@ -39,6 +40,8 @@ export default function Navbar({ totalItems }) {
             }}
           >
             <Typography
+              component={Link}
+              to="/"
               variant="h6"
               color="inherit"
               sx={{
@@ -57,7 +60,12 @@ export default function Navbar({ totalItems }) {
               }}
             />
             <div className="button">
-              <IconButton aria-label="Show cart items" color="inherit">
+              <IconButton
+                component={Link}
+                to="/Cart"
+                aria-label="Show cart items"
+                color="inherit"
+              >
                 <Badge badgeContent={totalItems} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
