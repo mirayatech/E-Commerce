@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Button, Typography, Grid } from "@mui/material";
 import CartItem from "./CartItem";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 // Color theme
 const theme = createTheme({
@@ -14,7 +15,10 @@ const theme = createTheme({
 const Cart = ({ cart }) => {
   const renderEmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your shopping cart, start adding some
+      You have no items in your shopping cart,
+      <Link sx={{ textDecoration: "none" }} to="/">
+        start adding some
+      </Link>
     </Typography>
   );
 
