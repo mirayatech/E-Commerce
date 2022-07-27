@@ -1,76 +1,102 @@
 import React from "react";
 import { Container, Button, Typography, Grid } from "@mui/material";
+import CartItem from "./CartItem";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export default function Cart({ cart }) {
-  const theme = createTheme({
-    palette: {
-      primary: { main: "#212121" },
-      secondary: { main: "#2196f3" },
-    },
-  });
+// Color theme
+const theme = createTheme({
+  palette: {
+    primary: { main: "#2196f3" },
+    secondary: { main: "#212121" },
+  },
+});
 
-  return (
+const Cart = ({ cart }) => {
+  const renderEmptyCart = () => (
+    <Typography variant="subtitle1">
+      You have no items in your shopping cart, start adding some
+    </Typography>
+  );
+
+  if (!cart.line_items) return "Loading";
+
+  const renderCart = () => (
     <ThemeProvider theme={theme}>
-      <Container>
-        <div />
-        <Typography
-          variant="h6"
-          sx={{
-            marginTop: "10%",
-          }}
-        >
-          Your Shopping Cart
+      <Grid container spacing={3}>
+        {cart.line_items.map((lineItem) => (
+          <Grid item xs={12} sm={4} key={lineItem.id}>
+            <CartItem item={lineItem} />
+          </Grid>
+        ))}
+      </Grid>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "10%",
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h4">
+          Subtotal: {cart.subtotal.formatted_with_symbol}
         </Typography>
-        <Grid container spacing={3}>
-          {cart.line_items.map((item) => (
-            <Grid item xs={12} sm={4} key={item.id}>
-              <div>{item.name}</div>
-            </Grid>
-          ))}
-        </Grid>
-        <div
-          style={{
-            display: "flex",
-            marginTop: "10%",
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="h4">
-            Subtotal: {cart.subtotal.formatted_with_symbol}
-          </Typography>
-          <div>
-            <Button
-              size="large"
-              type="button"
-              variant="contained"
-              color="primary"
-              sx={{
-                marginRight: "10px",
-                minWidth: "150px",
-                marginBottom: "5px",
-              }}
-            >
-              Empty Button
-            </Button>
-            <Button
-              size="large"
-              type="button"
-              variant="contained"
-              color="secondary"
-              sx={{
-                marginLeft: "10px",
-
-                minWidth: "150px",
-                marginBottom: "5px",
-              }}
-            >
-              Checkout
-            </Button>
-          </div>
+        <div>
+          <Button
+            size="large"
+            type="button"
+            variant="contained"
+            color="secondary"
+            sx={{
+              minWidth: "150px",
+              marginBottom: "10px",
+              [theme.breakpoints.up("xs")]: {
+                marginRight: "20px",
+              },
+            }}
+          >
+            Empty cart
+          </Button>
+          <Button
+            size="large"
+            type="button"
+            variant="contained"
+            color="primary"
+            sx={{
+              minWidth: "150px",
+              marginBottom: "10px",
+              [theme.breakpoints.up("xs")]: {
+                marginRight: "20px",
+              },
+            }}
+          >
+            Checkout
+          </Button>
         </div>
-      </Container>
+      </div>
     </ThemeProvider>
   );
-}
+
+  return (
+    <Container
+      style={{
+        flexGrow: "1",
+        backgroundColor: "#fafafa",
+      }}
+    >
+      <div />
+      <Typography
+        variant="h3"
+        gutterBottom
+        sx={{
+          marginTop: "8%",
+          paddingBottom: "10px",
+        }}
+      >
+        Your Shopping Cart
+      </Typography>
+      {!cart.line_items.length ? renderEmptyCart() : renderCart()}
+    </Container>
+  );
+};
+
+export default Cart;
