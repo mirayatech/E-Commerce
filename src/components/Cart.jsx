@@ -88,7 +88,7 @@ const Cart = ({ cart }) => {
         variant="h3"
         gutterBottom
         sx={{
-          marginTop: "8%",
+          marginTop: "100px",
           paddingBottom: "10px",
         }}
       >
