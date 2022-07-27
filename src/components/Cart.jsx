@@ -20,9 +20,9 @@ const Cart = ({
 }) => {
   const renderEmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your shopping cart,
-      <Link sx={{ textDecoration: "none" }} to="/">
-        start adding some
+      You have no items in your shopping cart,{" "}
+      <Link sx={{ textDecoration: "none" }} color="primary" to="/">
+        start adding some.{" "}
       </Link>
     </Typography>
   );
@@ -98,7 +98,7 @@ const Cart = ({
     >
       <div />
       <Typography
-        variant="h3"
+        variant="h4"
         gutterBottom
         sx={{
           marginTop: "100px",
