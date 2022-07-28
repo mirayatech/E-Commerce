@@ -71,6 +71,8 @@ const Cart = ({
             Empty cart
           </Button>
           <Button
+            component={Link}
+            to="/checkout"
             size="large"
             type="button"
             variant="contained"

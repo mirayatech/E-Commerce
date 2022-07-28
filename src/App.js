@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { commerce } from "./library/commerce";
-import { Products, Navbar, Cart } from "./components";
+import { Products, Navbar, Cart, Checkout } from "./components";
 import { Routes, Route } from "react-router-dom";
-import { set } from "react-hook-form";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -65,6 +64,7 @@ const App = () => {
             />
           }
         ></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
       </Routes>
     </div>
   );
