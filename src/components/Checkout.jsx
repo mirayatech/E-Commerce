@@ -10,10 +10,17 @@ import {
   Button,
 } from "@mui/material";
 
+import AdressForm from "./AdressForm";
+import PaymentForm from "./PaymentForm";
+
+const Confirmation = () => <div>Confirmation</div>;
+
 const steps = ["Shipping adress", "Payment details"];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
+
+  const Form = () => (activeStep === 0 ? <AdressForm /> : <PaymentForm />);
 
   return (
     <>
@@ -49,6 +56,7 @@ export default function Checkout() {
             ))}
           </Stepper>
           {/* If we are n the laststep  */}
+          {activeStep === steps.length ? <Confirmation /> : <Form />}
         </Paper>
       </main>
     </>
