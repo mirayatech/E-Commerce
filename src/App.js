@@ -64,7 +64,7 @@ const App = () => {
             />
           }
         ></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/Checkout" element={<Checkout />}></Route>
       </Routes>
     </div>
   );

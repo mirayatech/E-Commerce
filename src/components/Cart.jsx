@@ -72,7 +72,7 @@ const Cart = ({
           </Button>
           <Button
             component={Link}
-            to="/checkout"
+            to="/Checkout"
             size="large"
             type="button"
             variant="contained"
