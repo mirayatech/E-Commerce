@@ -9,7 +9,13 @@ function FormInput({ name, label, required }) {
     <Grid item xs={12} sm={6}>
       <Controller
         render={({ field }) => (
-          <TextField {...field} label={label} fullWidth required />
+          <TextField
+            variant="standard"
+            {...field}
+            label={label}
+            fullWidth
+            required
+          />
         )}
         control={control}
         name={name}

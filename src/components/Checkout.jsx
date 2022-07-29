@@ -77,7 +77,11 @@ export default function Checkout({ cart }) {
           >
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep} spacing={2}>
+          <Stepper
+            activeStep={activeStep}
+            spacing={2}
+            sx={{ marginBottom: "30px" }}
+          >
             {steps.map((step) => (
               <Step key={step}>
                 <StepLabel>{step}</StepLabel>
