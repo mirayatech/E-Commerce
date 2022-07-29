@@ -31,7 +31,15 @@ function AdressForm({ checkoutToken }) {
       checkoutTokenId
     );
     setShippingCountries(countries);
+    setShippingCountries(Object.keys(countries));
   };
+
+  // convert it from an object into an array
+  const countries = Object.entries(shippingCountries).map(([code, name]) => ({
+    id: code,
+    label: name,
+  }));
+  console.log(countries);
 
   useEffect(() => {
     fetchShippingCountries(checkoutToken.id);
@@ -53,15 +61,21 @@ function AdressForm({ checkoutToken }) {
             <FormInput required name="zip" label="ZIP / Postal Code" />
 
             {/* SelectField */}
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
-              <Select value={""} fullWidth onChange={""}>
-                <MenuItem key={""} value={""}>
-                  Select Me
-                </MenuItem>
+              <Select
+                value={shippingCountry}
+                fullWidth
+                onChange={(e) => setShippingCountry(e.target.value)}
+              >
+                {countries.map((country) => (
+                  <MenuItem key={"country.id"} value={"country.id"}>
+                    {country.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Subdivision</InputLabel>
               <Select value={""} fullWidth onChange={""}>
                 <MenuItem key={""} value={""}>
@@ -76,7 +90,7 @@ function AdressForm({ checkoutToken }) {
                   Select Me
                 </MenuItem>
               </Select>
-            </Grid> */}
+            </Grid>*/}
           </Grid>
         </form>
       </FormProvider>
