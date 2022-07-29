@@ -12,6 +12,7 @@ import {
 import { commerce } from "../library/commerce";
 import AdressForm from "./AdressForm";
 import PaymentForm from "./PaymentForm";
+import { CheckOutlined } from "@mui/icons-material";
 
 const Confirmation = () => <div>Confirmation</div>;
 
@@ -48,7 +49,7 @@ export default function Checkout({ cart }) {
     activeStep === 0 ? (
       <AdressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm />
+      <PaymentForm checkoutToken={checkoutToken} />
     );
 
   return (
