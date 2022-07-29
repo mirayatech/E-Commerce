@@ -14,6 +14,16 @@ import { useForm, FormProvider } from "react-hook-form";
 import FormInput from "./CostumTextField";
 
 function AdressForm() {
+  const [shippingCountries, setShippingCountries] = useState([]);
+  // chosen country
+  const [shippingCountry, setShippingCountry] = useState("");
+  const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
+  // chosen shipping subvision
+  const [shippingSubdivision, setShippingSubdivision] = useState("");
+  const [shippingOptions, setShippingOptions] = useState([]);
+  // chosen shippingOption
+  const [shippingOption, setShippingOption] = useState("");
+
   const methods = useForm();
   return (
     <>
