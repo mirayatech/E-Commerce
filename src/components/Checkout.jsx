@@ -18,7 +18,7 @@ const Confirmation = () => <div>Confirmation</div>;
 
 const steps = ["Shipping adress", "Payment details"];
 
-export default function Checkout({ cart }) {
+export default function Checkout({ cart, order, onCaptureCheckout, error }) {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
   const [activeStep, setActiveStep] = useState(0);
@@ -49,7 +49,12 @@ export default function Checkout({ cart }) {
     activeStep === 0 ? (
       <AdressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm checkoutToken={checkoutToken} backStep={backStep} />
+      <PaymentForm
+        nextStep={nextStep}
+        checkoutToken={checkoutToken}
+        backStep={backStep}
+        onCaptureCheckout={onCaptureCheckout}
+      />
     );
 
   return (
