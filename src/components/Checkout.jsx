@@ -9,7 +9,6 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-
 import { commerce } from "../library/commerce";
 import AdressForm from "./AdressForm";
 import PaymentForm from "./PaymentForm";
@@ -19,8 +18,8 @@ const Confirmation = () => <div>Confirmation</div>;
 const steps = ["Shipping adress", "Payment details"];
 
 export default function Checkout({ cart }) {
+  const [checkoutToken, setCheckoutToken] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
-  const [checkOutToken, setCheckoutToken] = useState(null);
 
   // create a checkouttoke, as soon as someone enters the chekout process
   useEffect(() => {
@@ -29,17 +28,17 @@ export default function Checkout({ cart }) {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
-        console.log(token);
+
         setCheckoutToken(token);
-      } catch (error) {}
+      } catch {}
     };
 
     generateToken();
-  }, []);
+  }, [cart]);
 
   const Form = () =>
     activeStep === 0 ? (
-      <AdressForm checkOutToken={checkOutToken} />
+      <AdressForm checkoutToken={checkoutToken} />
     ) : (
       <PaymentForm />
     );
@@ -78,7 +77,11 @@ export default function Checkout({ cart }) {
             ))}
           </Stepper>
           {/* If we are n the laststep  */}
-          {activeStep === steps.length ? <Confirmation /> : <Form />}
+          {activeStep === steps.length ? (
+            <Confirmation />
+          ) : (
+            checkoutToken && <Form />
+          )}
         </Paper>
       </main>
     </>

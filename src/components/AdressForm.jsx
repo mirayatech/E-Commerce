@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   inputLabel,
   Select,
@@ -13,7 +13,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { commerce } from "../library/commerce";
 import FormInput from "./CostumTextField";
 
-function AdressForm() {
+function AdressForm({ checkoutToken }) {
   const [shippingCountries, setShippingCountries] = useState([]);
   // chosen country
   const [shippingCountry, setShippingCountry] = useState("");
@@ -32,6 +32,10 @@ function AdressForm() {
     );
     setShippingCountries(countries);
   };
+
+  useEffect(() => {
+    fetchShippingCountries(checkoutToken.id);
+  }, []);
 
   return (
     <>
