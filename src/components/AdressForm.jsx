@@ -14,7 +14,7 @@ import { commerce } from "../library/commerce";
 import FormInput from "./CostumTextField";
 import { Link } from "react-router-dom";
 
-function AdressForm({ checkoutToken }) {
+function AdressForm({ checkoutToken, next }) {
   const [shippingCountries, setShippingCountries] = useState([]);
   // chosen country
   const [shippingCountry, setShippingCountry] = useState("");
@@ -84,7 +84,7 @@ function AdressForm({ checkoutToken }) {
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit((data) =>
-            test({
+            next({
               ...data,
               shippingCountry,
               shippingSubdivision,

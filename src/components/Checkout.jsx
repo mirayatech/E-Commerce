@@ -19,6 +19,7 @@ const steps = ["Shipping adress", "Payment details"];
 
 export default function Checkout({ cart }) {
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingData, setShippingData] = useState({});
   const [activeStep, setActiveStep] = useState(0);
 
   // create a checkouttoke, as soon as someone enters the chekout process
@@ -36,9 +37,16 @@ export default function Checkout({ cart }) {
     generateToken();
   }, [cart]);
 
+  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const next = (data) => {
+    setShippingData(data);
+    nextStep();
+  };
+
   const Form = () =>
     activeStep === 0 ? (
-      <AdressForm checkoutToken={checkoutToken} />
+      <AdressForm checkoutToken={checkoutToken} next={next} />
     ) : (
       <PaymentForm />
     );
