@@ -10,16 +10,28 @@ import {
 
 import { useForm, FormProvider } from "react-hook-form";
 
-export default function AdressForm() {
+import FormInput from "./CostumTextField";
+
+function AdressForm() {
   const methods = useForm();
   return (
     <>
       <Typography variant="h6" gutterBottom>
         Shipping Adress
-        <form onSubmit={""}>
-          <Grid spacing={3}></Grid>
-        </form>
       </Typography>
+      <FormProvider {...methods}>
+        <form onSubmit="">
+          <Grid container spacing={3}>
+            <FormInput required name="firstName" label="First Name" />
+            <FormInput required name="lastName" label="Last Name" />
+            <FormInput required name="adress1" label="Adress" />
+            <FormInput required name="email" label="Email" />
+            <FormInput required name="city" label="City" />
+            <FormInput required name="zip" label="ZIP / Postal Code" />
+          </Grid>
+        </form>
+      </FormProvider>
     </>
   );
 }
+export default AdressForm;
