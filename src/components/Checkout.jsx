@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Paper,
   Stepper,
@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 
+import { commerce } from "../library/commerce";
 import AdressForm from "./AdressForm";
 import PaymentForm from "./PaymentForm";
 
@@ -17,10 +18,31 @@ const Confirmation = () => <div>Confirmation</div>;
 
 const steps = ["Shipping adress", "Payment details"];
 
-export default function Checkout() {
+export default function Checkout({ cart }) {
   const [activeStep, setActiveStep] = useState(0);
+  const [checkOutToken, setCheckoutToken] = useState(null);
 
-  const Form = () => (activeStep === 0 ? <AdressForm /> : <PaymentForm />);
+  // create a checkouttoke, as soon as someone enters the chekout process
+  useEffect(() => {
+    const generateToken = async () => {
+      try {
+        const token = await commerce.checkout.generateToken(cart.id, {
+          type: "cart",
+        });
+        console.log(token);
+        setCheckoutToken(token);
+      } catch (error) {}
+    };
+
+    generateToken();
+  }, []);
+
+  const Form = () =>
+    activeStep === 0 ? (
+      <AdressForm checkOutToken={checkOutToken} />
+    ) : (
+      <PaymentForm />
+    );
 
   return (
     <>

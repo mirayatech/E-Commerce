@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import { useForm, FormProvider } from "react-hook-form";
-
+import { commerce } from "../library/commerce";
 import FormInput from "./CostumTextField";
 
 function AdressForm() {
@@ -23,8 +23,16 @@ function AdressForm() {
   const [shippingOptions, setShippingOptions] = useState([]);
   // chosen shippingOption
   const [shippingOption, setShippingOption] = useState("");
-
   const methods = useForm();
+
+  // Getting the countries
+  const fetchShippingCountries = async (checkoutTokenId) => {
+    const { countries } = await commerce.services.localeListShippingCountries(
+      checkoutTokenId
+    );
+    setShippingCountries(countries);
+  };
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -41,7 +49,7 @@ function AdressForm() {
             <FormInput required name="zip" label="ZIP / Postal Code" />
 
             {/* SelectField */}
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
               <Select value={""} fullWidth onChange={""}>
                 <MenuItem key={""} value={""}>
@@ -64,7 +72,7 @@ function AdressForm() {
                   Select Me
                 </MenuItem>
               </Select>
-            </Grid>
+            </Grid> */}
           </Grid>
         </form>
       </FormProvider>
