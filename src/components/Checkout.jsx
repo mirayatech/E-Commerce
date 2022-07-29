@@ -49,7 +49,7 @@ export default function Checkout({ cart }) {
     activeStep === 0 ? (
       <AdressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm checkoutToken={checkoutToken} />
+      <PaymentForm checkoutToken={checkoutToken} backStep={backStep} />
     );
 
   return (
