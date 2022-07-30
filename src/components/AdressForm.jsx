@@ -22,7 +22,6 @@ const AddressForm = ({ checkoutToken, test }) => {
   const [shippingOption, setShippingOption] = useState('')
   const methods = useForm()
 
-  // Fetching (shipping) countries
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
@@ -32,7 +31,6 @@ const AddressForm = ({ checkoutToken, test }) => {
     setShippingCountry(Object.keys(countries)[0])
   }
 
-  // Fetching (shipping) Subdivisions
   const fetchSubdivisions = async (countryCode) => {
     const { subdivisions } = await commerce.services.localeListSubdivisions(
       countryCode
@@ -42,7 +40,6 @@ const AddressForm = ({ checkoutToken, test }) => {
     setShippingSubdivision(Object.keys(subdivisions)[0])
   }
 
-  // Fetching the shipping options
   const fetchShippingOptions = async (
     checkoutTokenId,
     country,
@@ -54,25 +51,29 @@ const AddressForm = ({ checkoutToken, test }) => {
     )
 
     setShippingOptions(options)
-    setShippingOption(options[0].id)
+    const firstShippingOption = options[0].id
+    setShippingOption(firstShippingOption)
   }
 
   useEffect(() => {
     fetchShippingCountries(checkoutToken.id)
-  }, [])
+  }, [checkoutToken.id])
 
   useEffect(() => {
-    if (shippingCountry) fetchSubdivisions(shippingCountry)
+    if (shippingCountry) {
+      fetchSubdivisions(shippingCountry)
+    }
   }, [shippingCountry])
 
   useEffect(() => {
-    if (shippingSubdivision)
+    if (shippingSubdivision) {
       fetchShippingOptions(
         checkoutToken.id,
         shippingCountry,
         shippingSubdivision
       )
-  }, [shippingSubdivision])
+    }
+  }, [checkoutToken.id, shippingCountry, shippingSubdivision])
 
   return (
     <>
@@ -102,7 +103,7 @@ const AddressForm = ({ checkoutToken, test }) => {
               <Select
                 value={shippingCountry}
                 fullWidth
-                onChange={(e) => setShippingCountry(e.target.value)}
+                onChange={(event) => setShippingCountry(event.target.value)}
               >
                 {Object.entries(shippingCountries)
                   .map(([code, name]) => ({ id: code, label: name }))
@@ -118,7 +119,7 @@ const AddressForm = ({ checkoutToken, test }) => {
               <Select
                 value={shippingSubdivision}
                 fullWidth
-                onChange={(e) => setShippingSubdivision(e.target.value)}
+                onChange={(event) => setShippingSubdivision(event.target.value)}
               >
                 {Object.entries(shippingSubdivisions)
                   .map(([code, name]) => ({ id: code, label: name }))
@@ -134,12 +135,12 @@ const AddressForm = ({ checkoutToken, test }) => {
               <Select
                 value={shippingOption}
                 fullWidth
-                onChange={(e) => setShippingOption(e.target.value)}
+                onChange={(event) => setShippingOption(event.target.value)}
               >
                 {shippingOptions
-                  .map((sO) => ({
-                    id: sO.id,
-                    label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
+                  .map((shippingOption) => ({
+                    id: shippingOption.id,
+                    label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})`,
                   }))
                   .map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -154,7 +155,7 @@ const AddressForm = ({ checkoutToken, test }) => {
             style={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginTop: '20px',
+              marginTop: 20,
             }}
           >
             <Button component={Link} variant="outlined" to="/cart">
