@@ -14,25 +14,20 @@ import { commerce } from "../library/commerce";
 import FormInput from "./CostumTextField";
 import { Link } from "react-router-dom";
 
-function AdressForm({ checkoutToken, next }) {
+const AddressForm = ({ checkoutToken, test }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
-  // chosen country
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  // chosen shipping subvision
   const [shippingSubdivision, setShippingSubdivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
-  // chosen shippingOption
   const [shippingOption, setShippingOption] = useState("");
   const methods = useForm();
 
-  // Getting the countries
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
     );
 
-    // Chosen Country
     setShippingCountries(countries);
     setShippingCountry(Object.keys(countries)[0]);
   };
@@ -45,6 +40,7 @@ function AdressForm({ checkoutToken, next }) {
     setShippingSubdivisions(subdivisions);
     setShippingSubdivision(Object.keys(subdivisions)[0]);
   };
+
   const fetchShippingOptions = async (
     checkoutTokenId,
     country,
@@ -84,7 +80,7 @@ function AdressForm({ checkoutToken, next }) {
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit((data) =>
-            next({
+            test({
               ...data,
               shippingCountry,
               shippingSubdivision,
@@ -93,12 +89,12 @@ function AdressForm({ checkoutToken, next }) {
           )}
         >
           <Grid container spacing={3}>
-            <FormInput name="firstName" label="First name" />
-            <FormInput name="lastName" label="Last name" />
-            <FormInput name="address1" label="Address line 1" />
-            <FormInput name="email" label="Email" />
-            <FormInput name="city" label="City" />
-            <FormInput name="zip" label="Zip / Postal code" />
+            <FormInput required name="firstName" label="First name" />
+            <FormInput required name="lastName" label="Last name" />
+            <FormInput required name="address1" label="Address line 1" />
+            <FormInput required name="email" label="Email" />
+            <FormInput required name="city" label="City" />
+            <FormInput required name="zip" label="Zip / Postal code" />
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
               <Select
@@ -139,9 +135,9 @@ function AdressForm({ checkoutToken, next }) {
                 onChange={(e) => setShippingOption(e.target.value)}
               >
                 {shippingOptions
-                  .map((shippingOption) => ({
-                    id: shippingOption.id,
-                    label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})`,
+                  .map((sO) => ({
+                    id: sO.id,
+                    label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
                   }))
                   .map((item) => (
                     <MenuItem key={item.id} value={item.id}>
@@ -152,13 +148,7 @@ function AdressForm({ checkoutToken, next }) {
             </Grid>
           </Grid>
           <br />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "20px",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button component={Link} variant="outlined" to="/cart">
               Back to Cart
             </Button>
@@ -170,5 +160,6 @@ function AdressForm({ checkoutToken, next }) {
       </FormProvider>
     </>
   );
-}
-export default AdressForm;
+};
+
+export default AddressForm;

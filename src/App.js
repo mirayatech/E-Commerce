@@ -8,33 +8,39 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  // Get the products
+
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
+
     setProducts(data);
   };
-  // Getting the cart
+
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve());
   };
-  // Add item to cart
+
   const handleAddToCart = async (productId, quantity) => {
-    const { cart } = await commerce.cart.add(productId, quantity);
-    setCart(cart);
-  };
-  const handleUpdateCartQty = async (lineItemId, quantity) => {
-    const { cart } = await commerce.cart.update(lineItemId, { quantity });
-    setCart(cart);
+    const item = await commerce.cart.add(productId, quantity);
+
+    setCart(item.cart);
   };
 
-  const handleRemoveFromCart = async (productId) => {
-    const { cart } = await commerce.cart.remove(productId);
-    setCart(cart);
+  const handleUpdateCartQty = async (lineItemId, quantity) => {
+    const response = await commerce.cart.update(lineItemId, { quantity });
+
+    setCart(response.cart);
+  };
+
+  const handleRemoveFromCart = async (lineItemId) => {
+    const response = await commerce.cart.remove(lineItemId);
+
+    setCart(response.cart);
   };
 
   const handleEmptyCart = async () => {
-    const { cart } = await commerce.cart.empty();
-    setCart(cart);
+    const response = await commerce.cart.empty();
+
+    setCart(response.cart);
   };
 
   const refreshCart = async () => {
@@ -57,12 +63,11 @@ const App = () => {
       setErrorMessage(error.data.error.message);
     }
   };
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, []);
-
-  console.log(cart);
 
   return (
     <div>

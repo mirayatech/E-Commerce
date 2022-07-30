@@ -9,21 +9,22 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Review from "./Review";
 
-const stripePromise = loadStripe("process.env.REACT_APP_STRIPE_PUBLIC_KEY");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-export default function PaymentForm({
+const PaymentForm = ({
   checkoutToken,
+  nextStep,
   backStep,
   shippingData,
   onCaptureCheckout,
-  nextStep,
-}) {
+}) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
     if (!stripe || !elements) return;
 
-    const cardElement = elements.getElements(CardElement);
+    const cardElement = elements.getElement(CardElement);
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
@@ -94,4 +95,6 @@ export default function PaymentForm({
       </Elements>
     </>
   );
-}
+};
+
+export default PaymentForm;
