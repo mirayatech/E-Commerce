@@ -55,11 +55,12 @@ const App = () => {
         checkoutTokenId,
         newOrder
       );
+      refreshCart();
 
       setOrder(incomingOrder);
-
-      refreshCart();
     } catch (error) {
+      refreshCart();
+
       setErrorMessage(error.data.error.message);
     }
   };

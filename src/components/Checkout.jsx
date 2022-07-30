@@ -15,14 +15,13 @@ import PaymentForm from "./PaymentForm";
 import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { CheckOutlined } from "@mui/icons-material";
-
 const steps = ["Shipping address", "Payment details"];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
+  const [isFinished, setIsFinished] = useState(false);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -49,6 +48,12 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     nextStep();
   };
 
+  const timeout = () => {
+    setTimeout(() => {
+      setIsFinished(true);
+    }, 3000);
+  };
+
   let Confirmation = () =>
     order.customer ? (
       <>
@@ -67,23 +72,22 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
           Back to home
         </Button>
       </>
-    ) : (
-      <div>
-        <CircularProgress />
-      </div>
-    );
-
-  if (error) {
-    Confirmation = () => (
+    ) : isFinished ? (
       <>
-        <Typography variant="h5">Error: {error}</Typography>
+        <div>
+          <Typography variant="h5">Thank you for your purchase!</Typography>
+          <Divider />
+        </div>
         <br />
         <Button component={Link} variant="outlined" type="button" to="/">
           Back to home
         </Button>
       </>
+    ) : (
+      <div>
+        <CircularProgress />
+      </div>
     );
-  }
 
   const Form = () =>
     activeStep === 0 ? (
@@ -100,6 +104,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         backStep={backStep}
         shippingData={shippingData}
         onCaptureCheckout={onCaptureCheckout}
+        timeout={timeout}
       />
     );
 
