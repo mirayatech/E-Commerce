@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Button, Divider } from '@mui/material'
+import { Typography, Button, Divider, Container } from '@mui/material'
 import {
   Elements,
   CardElement,
@@ -22,76 +22,75 @@ const PaymentForm = ({
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault()
 
-    if (!stripe || !elements) return
-
     const cardElement = elements.getElement(CardElement)
 
-    // capturing data sent from the cart (item, price, shipping, ect)
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     })
 
-    if (error) {
-      console.log('[error]', error)
-    } else {
-      const orderData = {
-        line_items: checkoutToken.live.line_items,
-        customer: {
-          firstname: shippingData.firstName,
-          lastname: shippingData.lastName,
-          email: shippingData.email,
+    const orderData = {
+      line_items: checkoutToken.live.line_items,
+      customer: {
+        firstname: shippingData.firstName,
+        lastname: shippingData.lastName,
+        email: shippingData.email,
+      },
+      shipping: {
+        name: 'International',
+        street: shippingData.address1,
+        town_city: shippingData.city,
+        county_state: shippingData.shippingSubdivision,
+        postal_zip_code: shippingData.zip,
+        country: shippingData.shippingCountry,
+      },
+      fulfillment: { shipping_method: shippingData.shippingOption },
+      payment: {
+        gateway: 'stripe',
+        stripe: {
+          payment_method_id: paymentMethod.id,
         },
-        shipping: {
-          name: 'International',
-          street: shippingData.address1,
-          town_city: shippingData.city,
-          county_state: shippingData.shippingSubdivision,
-          postal_zip_code: shippingData.zip,
-          country: shippingData.shippingCountry,
-        },
-        fulfillment: { shipping_method: shippingData.shippingOption },
-        payment: {
-          gateway: 'stripe',
-          stripe: {
-            payment_method_id: paymentMethod.id,
-          },
-        },
-      }
-
-      onCaptureCheckout(checkoutToken.id, orderData)
-      timeout()
-
-      nextStep()
+      },
     }
+
+    onCaptureCheckout(checkoutToken.id, orderData)
+    timeout()
+
+    nextStep()
   }
 
   return (
     <>
       <Review checkoutToken={checkoutToken} />
       <Divider />
-      <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>
+      <Typography variant="h6" component="h2" gutterBottom sx={{ my: 3 }}>
         Payment method
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-            <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+            <form onSubmit={(event) => handleSubmit(event, elements, stripe)}>
               <CardElement />
-              <br /> <br />
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button variant="outlined" onClick={backStep}>
+              <Container
+                sx={{
+                  marginTop: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: 0,
+                }}
+              >
+                <Button aria-label="Back" variant="outlined" onClick={backStep}>
                   Back
                 </Button>
                 <Button
+                  aria-label="Pay"
                   type="submit"
                   variant="contained"
-                  disabled={!stripe}
                   color="primary"
                 >
                   Pay {checkoutToken.live.subtotal.formatted_with_symbol}
                 </Button>
-              </div>
+              </Container>
             </form>
           )}
         </ElementsConsumer>
