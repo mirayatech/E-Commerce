@@ -38,7 +38,16 @@ const Cart = ({
   )
 
   if (!cart.line_items) {
-    return ''
+    return (
+      <CircularProgress
+        status="loading"
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+        }}
+      />
+    )
   }
 
   const renderCart = (
