@@ -1,46 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import {
-  inputLabel,
   Select,
   MenuItem,
   Button,
   Grid,
   Typography,
   InputLabel,
-} from "@mui/material";
+} from '@mui/material'
 
-import { useForm, FormProvider } from "react-hook-form";
-import { commerce } from "../library/commerce";
-import FormInput from "./CostumTextField";
-import { Link } from "react-router-dom";
+import { useForm, FormProvider } from 'react-hook-form'
+import { commerce } from '../library/commerce'
+import FormInput from './CostumTextField'
+import { Link } from 'react-router-dom'
 
 const AddressForm = ({ checkoutToken, test }) => {
-  const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState("");
-  const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  const [shippingSubdivision, setShippingSubdivision] = useState("");
-  const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState("");
-  const methods = useForm();
+  const [shippingCountries, setShippingCountries] = useState([])
+  const [shippingCountry, setShippingCountry] = useState('')
+  const [shippingSubdivisions, setShippingSubdivisions] = useState([])
+  const [shippingSubdivision, setShippingSubdivision] = useState('')
+  const [shippingOptions, setShippingOptions] = useState([])
+  const [shippingOption, setShippingOption] = useState('')
+  const methods = useForm()
 
+  // Fetching (shipping) countries
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
-    );
+    )
 
-    setShippingCountries(countries);
-    setShippingCountry(Object.keys(countries)[0]);
-  };
+    setShippingCountries(countries)
+    setShippingCountry(Object.keys(countries)[0])
+  }
 
+  // Fetching (shipping) Subdivisions
   const fetchSubdivisions = async (countryCode) => {
     const { subdivisions } = await commerce.services.localeListSubdivisions(
       countryCode
-    );
+    )
 
-    setShippingSubdivisions(subdivisions);
-    setShippingSubdivision(Object.keys(subdivisions)[0]);
-  };
+    setShippingSubdivisions(subdivisions)
+    setShippingSubdivision(Object.keys(subdivisions)[0])
+  }
 
+  // Fetching the shipping options
   const fetchShippingOptions = async (
     checkoutTokenId,
     country,
@@ -49,19 +51,19 @@ const AddressForm = ({ checkoutToken, test }) => {
     const options = await commerce.checkout.getShippingOptions(
       checkoutTokenId,
       { country, region: stateProvince }
-    );
+    )
 
-    setShippingOptions(options);
-    setShippingOption(options[0].id);
-  };
-
-  useEffect(() => {
-    fetchShippingCountries(checkoutToken.id);
-  }, []);
+    setShippingOptions(options)
+    setShippingOption(options[0].id)
+  }
 
   useEffect(() => {
-    if (shippingCountry) fetchSubdivisions(shippingCountry);
-  }, [shippingCountry]);
+    fetchShippingCountries(checkoutToken.id)
+  }, [])
+
+  useEffect(() => {
+    if (shippingCountry) fetchSubdivisions(shippingCountry)
+  }, [shippingCountry])
 
   useEffect(() => {
     if (shippingSubdivision)
@@ -69,8 +71,8 @@ const AddressForm = ({ checkoutToken, test }) => {
         checkoutToken.id,
         shippingCountry,
         shippingSubdivision
-      );
-  }, [shippingSubdivision]);
+      )
+  }, [shippingSubdivision])
 
   return (
     <>
@@ -150,9 +152,9 @@ const AddressForm = ({ checkoutToken, test }) => {
           <br />
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "20px",
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: '20px',
             }}
           >
             <Button component={Link} variant="outlined" to="/cart">
@@ -165,7 +167,7 @@ const AddressForm = ({ checkoutToken, test }) => {
         </form>
       </FormProvider>
     </>
-  );
-};
+  )
+}
 
-export default AddressForm;
+export default AddressForm

@@ -1,16 +1,16 @@
-import React from "react";
-import CartItem from "./CartItem";
-import { Container, Button, Typography, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import React from 'react'
+import CartItem from './CartItem'
+import { Container, Button, Typography, Grid } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 
 // Color theme
 const theme = createTheme({
   palette: {
-    primary: { main: "#2196f3" },
-    secondary: { main: "#212121" },
+    primary: { main: '#2196f3' },
+    secondary: { main: '#212121' },
   },
-});
+})
 
 const Cart = ({
   cart,
@@ -20,14 +20,14 @@ const Cart = ({
 }) => {
   const renderEmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your shopping cart,{" "}
-      <Link sx={{ textDecoration: "none" }} color="primary" to="/">
-        start adding some.{" "}
+      You have no items in your shopping cart,{' '}
+      <Link sx={{ textDecoration: 'none' }} color="primary" to="/">
+        start adding some.{' '}
       </Link>
     </Typography>
-  );
+  )
 
-  if (!cart.line_items) return "Loading";
+  if (!cart.line_items) return 'Loading'
 
   const renderCart = () => (
     <ThemeProvider theme={theme}>
@@ -44,10 +44,10 @@ const Cart = ({
       </Grid>
       <div
         style={{
-          display: "flex",
-          marginTop: "10%",
-          width: "100%",
-          justifyContent: "space-between",
+          display: 'flex',
+          marginTop: '10%',
+          width: '100%',
+          justifyContent: 'space-between',
         }}
       >
         <Typography variant="h4">
@@ -60,10 +60,10 @@ const Cart = ({
             variant="contained"
             color="secondary"
             sx={{
-              minWidth: "150px",
-              marginBottom: "10px",
-              [theme.breakpoints.up("xs")]: {
-                marginRight: "20px",
+              minWidth: '150px',
+              marginBottom: '10px',
+              [theme.breakpoints.up('xs')]: {
+                marginRight: '20px',
               },
             }}
             onClick={handleEmptyCart}
@@ -78,10 +78,10 @@ const Cart = ({
             variant="contained"
             color="primary"
             sx={{
-              minWidth: "150px",
-              marginBottom: "10px",
-              [theme.breakpoints.up("xs")]: {
-                marginRight: "20px",
+              minWidth: '150px',
+              marginBottom: '10px',
+              [theme.breakpoints.up('xs')]: {
+                marginRight: '20px',
               },
             }}
           >
@@ -90,12 +90,12 @@ const Cart = ({
         </div>
       </div>
     </ThemeProvider>
-  );
+  )
 
   return (
     <Container
       style={{
-        backgroundColor: "#fafafa",
+        backgroundColor: '#fafafa',
       }}
     >
       <div />
@@ -103,15 +103,15 @@ const Cart = ({
         variant="h4"
         gutterBottom
         sx={{
-          marginTop: "100px",
-          paddingBottom: "10px",
+          marginTop: '100px',
+          paddingBottom: '10px',
         }}
       >
         Your Shopping Cart
       </Typography>
       {!cart.line_items.length ? renderEmptyCart() : renderCart()}
     </Container>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

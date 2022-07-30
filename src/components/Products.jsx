@@ -1,14 +1,14 @@
-import React from "react";
-import Product from "./Product";
-import { Grid } from "@mui/material";
+import React from 'react'
+import Product from './Product'
+import { Grid } from '@mui/material'
 
-export default function Products({ products, onAddToCart }) {
+const Products = ({ products, onAddToCart }) => {
   return (
     <main
       style={{
-        flexGrow: "1",
-        paddingTop: "80px",
-        backgroundColor: "#fafafa",
+        flexGrow: '1',
+        paddingTop: '80px',
+        backgroundColor: '#fafafa',
       }}
     >
       <div />
@@ -20,5 +20,7 @@ export default function Products({ products, onAddToCart }) {
         ))}
       </Grid>
     </main>
-  );
+  )
 }
+
+export default Products

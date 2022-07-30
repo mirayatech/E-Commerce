@@ -1,22 +1,22 @@
-import React from "react";
-import { Typography } from "@mui/material";
+import React from 'react'
+import { Typography } from '@mui/material'
 import {
   Card,
   CardMedia,
   CardContent,
   CardActions,
   IconButton,
-} from "@mui/material";
+} from '@mui/material'
 
-import { AddShoppingCart } from "@mui/icons-material";
+import { AddShoppingCart } from '@mui/icons-material'
 // import useStyles from "./styles";
 
-export default function Product({ product, onAddToCart }) {
+const Product = ({ product, onAddToCart }) => {
   // const classes = useStyles();
   return (
-    <Card sx={{ maxWidth: "100%" }}>
+    <Card sx={{ maxWidth: '100%' }}>
       <CardMedia
-        sx={{ height: 0, paddingTop: "56.25%" }}
+        sx={{ height: 0, paddingTop: '56.25%' }}
         image={product.image.url}
         title={product.name}
       />
@@ -24,14 +24,14 @@ export default function Product({ product, onAddToCart }) {
       <CardContent>
         <CardContent
           sx={{
-            padding: "0",
-            display: "flex",
-            justifyContent: "space-between",
+            padding: '0',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <Typography variant="h5">{product.name}</Typography>
           <Typography variant="h5">
-            {product.price.formatted_with_symbol}{" "}
+            {product.price.formatted_with_symbol}{' '}
           </Typography>
         </CardContent>
         <Typography
@@ -43,7 +43,7 @@ export default function Product({ product, onAddToCart }) {
 
       <CardActions
         disableSpacing
-        sx={{ display: "flex", justifyContent: "flex-end" }}
+        sx={{ display: 'flex', justifyContent: 'flex-end' }}
       >
         <IconButton
           aria-label="Add to Cart"
@@ -53,5 +53,7 @@ export default function Product({ product, onAddToCart }) {
         </IconButton>
       </CardActions>
     </Card>
-  );
+  )
 }
+
+export default Product

@@ -1,27 +1,19 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Badge,
-  MenuItem,
-  Menu,
-  Typography,
-} from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react'
+import { AppBar, Toolbar, IconButton, Badge, Typography } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { Link, useLocation } from 'react-router-dom'
 
 // Color theme
 const theme = createTheme({
   palette: {
-    primary: { main: "#212121" },
-    secondary: { main: "#2196f3" },
+    primary: { main: '#212121' },
+    secondary: { main: '#2196f3' },
   },
-});
+})
 
-export default function Navbar({ totalItems }) {
-  const location = useLocation();
+const Navbar = ({ totalItems }) => {
+  const location = useLocation()
 
   return (
     <>
@@ -31,14 +23,14 @@ export default function Navbar({ totalItems }) {
           color="primary"
           core="inherit"
           sx={{
-            boxShadow: "none",
-            borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+            boxShadow: 'none',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
           }}
         >
           <Toolbar
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
+              display: 'flex',
+              justifyContent: 'space-between',
             }}
           >
             <Typography
@@ -47,8 +39,8 @@ export default function Navbar({ totalItems }) {
               variant="h6"
               color="inherit"
               sx={{
-                fontWeight: "600",
-                textDecoration: "none",
+                fontWeight: '600',
+                textDecoration: 'none',
               }}
             >
               MyStore
@@ -58,7 +50,7 @@ export default function Navbar({ totalItems }) {
                 flexGrow: 1,
               }}
             />
-            {location.pathname === "/" && (
+            {location.pathname === '/' && (
               <div className="button">
                 <IconButton
                   component={Link}
@@ -76,5 +68,7 @@ export default function Navbar({ totalItems }) {
         </AppBar>
       </ThemeProvider>
     </>
-  );
+  )
 }
+
+export default Navbar

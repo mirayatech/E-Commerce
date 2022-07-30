@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Typography,
   Button,
@@ -6,19 +6,19 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-} from "@mui/material";
+} from '@mui/material'
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // Color theme
 const theme = createTheme({
   palette: {
-    primary: { main: "#212121" },
-    secondary: { main: "#E53935" },
+    primary: { main: '#212121' },
+    secondary: { main: '#E53935' },
   },
-});
+})
 
-export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   return (
     <ThemeProvider theme={theme}>
       <Card>
@@ -27,14 +27,14 @@ export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
           alt={item.name}
           sx={{ height: 260 }}
         />
-        <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
+        <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5">{item.name}</Typography>
           <Typography variant="h5">
             {item.line_total.formatted_with_symbol}
           </Typography>
         </CardContent>
-        <CardActions sx={{ justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+        <CardActions sx={{ justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <Button
               type="button"
               size="small"
@@ -64,5 +64,6 @@ export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
         </CardActions>
       </Card>
     </ThemeProvider>
-  );
+  )
 }
+export default CartItem
