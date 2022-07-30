@@ -9,41 +9,51 @@ import {
 } from '@mui/material'
 
 import { AddShoppingCart } from '@mui/icons-material'
-// import useStyles from "./styles";
 
 const Product = ({ product, onAddToCart }) => {
-  // const classes = useStyles();
   return (
-    <Card sx={{ maxWidth: '100%' }}>
+    <Card sx={{ height: 350 }}>
       <CardMedia
-        sx={{ height: 0, paddingTop: '56.25%' }}
         image={product.image.url}
+        component="img"
+        alt={product.name}
         title={product.name}
+        sx={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          width: '100%',
+          height: '50%',
+        }}
       />
 
       <CardContent>
         <CardContent
           sx={{
-            padding: '0',
+            padding: 0,
             display: 'flex',
             justifyContent: 'space-between',
           }}
         >
-          <Typography variant="h5">{product.name}</Typography>
-          <Typography variant="h5">
-            {product.price.formatted_with_symbol}{' '}
+          <Typography variant="h5" component="h2" noWrap>
+            {product.name}
+          </Typography>
+          <Typography variant="h5" component="h3">
+            {product.price.formatted_with_symbol}
           </Typography>
         </CardContent>
         <Typography
           dangerouslySetInnerHTML={{ __html: product.description }}
           variant="body2"
           color="textSecondary"
-        ></Typography>
+        />
       </CardContent>
 
       <CardActions
         disableSpacing
-        sx={{ display: 'flex', justifyContent: 'flex-end' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
       >
         <IconButton
           aria-label="Add to Cart"
