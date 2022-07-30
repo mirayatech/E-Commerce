@@ -131,7 +131,7 @@ const Cart = ({
         backgroundColor: '#fafafa',
       }}
     >
-      <Typography variant="h3" component="h1" textAlign="center" mt={3}>
+      <Typography variant="h3" component="h1" textAlign="center" my={3}>
         Your Shopping Cart
       </Typography>
       {!cart.line_items.length ? renderEmptyCart : renderCart}
