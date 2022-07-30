@@ -106,13 +106,13 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   return (
     <>
       <CssBaseline />
-      <div />
-      <main>
-        <Paper>
+      <div style={{ marginTop: "12%" }} />
+      <main style={{ backgroundColor: "#fafafa" }}>
+        <Paper sx={{ padding: "30px", maxWidth: "600px", margin: "auto" }}>
           <Typography variant="h4" align="center">
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep}>
+          <Stepper activeStep={activeStep} sx={{ padding: "10px 0 30px 0" }}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>

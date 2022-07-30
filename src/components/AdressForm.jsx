@@ -148,7 +148,13 @@ const AddressForm = ({ checkoutToken, test }) => {
             </Grid>
           </Grid>
           <br />
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "20px",
+            }}
+          >
             <Button component={Link} variant="outlined" to="/cart">
               Back to Cart
             </Button>
