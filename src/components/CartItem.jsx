@@ -6,6 +6,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Container,
 } from '@mui/material'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -28,14 +29,17 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           sx={{ height: 260 }}
         />
         <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="h5">{item.name}</Typography>
-          <Typography variant="h5">
+          <Typography variant="h5" component="h2">
+            {item.name}
+          </Typography>
+          <Typography variant="h5" component="h2">
             {item.line_total.formatted_with_symbol}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Container style={{ display: 'flex', alignItems: 'center' }}>
             <Button
+              aria-label="decrease"
               type="button"
               size="small"
               color="primary"
@@ -43,17 +47,19 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
             >
               -
             </Button>
-            <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
+            <Typography component="h3">&nbsp;{item.quantity}&nbsp;</Typography>
             <Button
               type="button"
               size="small"
               color="primary"
+              aria-label="increase"
               onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
             >
               +
             </Button>
-          </div>
+          </Container>
           <Button
+            aria-label="Remove"
             variant="contained"
             type="button"
             color="secondary"
