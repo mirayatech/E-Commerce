@@ -14,12 +14,13 @@ const theme = createTheme({
 
 const Navbar = ({ totalItems }) => {
   const location = useLocation()
+  const isHome = location.pathname === '/'
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <AppBar
-          position="fixed"
+          position="sticky"
           color="primary"
           core="inherit"
           sx={{
@@ -50,7 +51,7 @@ const Navbar = ({ totalItems }) => {
                 flexGrow: 1,
               }}
             />
-            {location.pathname === '/' && (
+            {isHome && (
               <div className="button">
                 <IconButton
                   component={Link}
