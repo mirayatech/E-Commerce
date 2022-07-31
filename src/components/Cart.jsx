@@ -26,7 +26,7 @@ const Cart = ({
   const renderEmptyCart = (
     <Typography
       variant="subtitle1"
-      component="h1"
+      component="h2"
       textAlign="center"
       mt="250px"
     >
@@ -74,7 +74,7 @@ const Cart = ({
       >
         <Typography
           variant="h4"
-          component="h1"
+          component="h2"
           sx={{
             width: '100%',
           }}
