@@ -4,7 +4,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useLocation } from 'react-router-dom'
 
-// Color theme
 const theme = createTheme({
   palette: {
     primary: { main: '#212121' },
