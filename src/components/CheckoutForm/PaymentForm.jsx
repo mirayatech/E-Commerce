@@ -1,5 +1,7 @@
 import React from 'react'
 import { Typography, Button, Divider, Container } from '@mui/material'
+import { commerce } from '../../library/commerce'
+
 import {
   Elements,
   CardElement,
@@ -16,6 +18,7 @@ const PaymentForm = ({
   nextStep,
   backStep,
   shippingData,
+  setCart,
   onCaptureCheckout,
   timeout,
 }) => {
@@ -53,10 +56,16 @@ const PaymentForm = ({
       },
     }
 
+    const refreshCart = async () => {
+      const newCart = await commerce.cart.refresh()
+      setCart(newCart)
+    }
+
     onCaptureCheckout(checkoutToken.id, orderData)
     timeout()
 
     nextStep()
+    refreshCart()
   }
 
   return (

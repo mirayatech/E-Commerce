@@ -37,17 +37,11 @@ const App = () => {
     setCart(response.cart)
   }
 
-  const refreshCart = async () => {
-    const newCart = await commerce.cart.refresh()
-    setCart(newCart)
-  }
-
   const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
     const incomingOrder = await commerce.checkout.capture(
       checkoutTokenId,
       newOrder
     )
-    refreshCart()
     setOrder(incomingOrder)
   }
 
@@ -85,6 +79,7 @@ const App = () => {
               cart={cart}
               order={order}
               onCaptureCheckout={handleCaptureCheckout}
+              setCart={setCart}
             />
           }
         />
