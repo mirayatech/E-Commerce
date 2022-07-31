@@ -16,7 +16,7 @@ import PaymentForm from '../PaymentForm'
 import { Link } from 'react-router-dom'
 const steps = ['Shipping address', 'Payment details']
 
-const Checkout = ({ cart, onCaptureCheckout }) => {
+const Checkout = ({ cart, onCaptureCheckout, setCart }) => {
   const [checkoutToken, setCheckoutToken] = useState(null)
   const [activeStep, setActiveStep] = useState(0)
   const [shippingData, setShippingData] = useState({})
@@ -80,6 +80,7 @@ const Checkout = ({ cart, onCaptureCheckout }) => {
       />
     ) : (
       <PaymentForm
+        setCart={setCart}
         checkoutToken={checkoutToken}
         nextStep={nextStep}
         backStep={backStep}
