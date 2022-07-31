@@ -6,10 +6,11 @@ import {
   Grid,
   Typography,
   InputLabel,
+  Container,
 } from '@mui/material'
 
 import { useForm, FormProvider } from 'react-hook-form'
-import { commerce } from '../library/commerce'
+import { commerce } from '../../library/commerce'
 import FormInput from './CostumTextField'
 import { Link } from 'react-router-dom'
 
@@ -77,7 +78,7 @@ const AddressForm = ({ checkoutToken, test }) => {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" component="h2" gutterBottom>
         Shipping address
       </Typography>
       <FormProvider {...methods}>
@@ -150,21 +151,33 @@ const AddressForm = ({ checkoutToken, test }) => {
               </Select>
             </Grid>
           </Grid>
-          <br />
-          <div
-            style={{
+
+          <Container
+            sx={{
+              p: 0,
               display: 'flex',
               justifyContent: 'space-between',
-              marginTop: 20,
+              marginTop: 3,
+              mx: 0,
             }}
           >
-            <Button component={Link} variant="outlined" to="/cart">
+            <Button
+              aria-label="Back to Cart"
+              component={Link}
+              variant="outlined"
+              to="/cart"
+            >
               Back to Cart
             </Button>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              aria-label="Next"
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               Next
             </Button>
-          </div>
+          </Container>
         </form>
       </FormProvider>
     </>

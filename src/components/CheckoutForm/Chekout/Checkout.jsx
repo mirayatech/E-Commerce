@@ -10,9 +10,9 @@ import {
   Button,
   Container,
 } from '@mui/material'
-import { commerce } from '../library/commerce'
-import AdressForm from './AdressForm'
-import PaymentForm from './PaymentForm'
+import { commerce } from '../../../library/commerce'
+import AdressForm from '../AdressForm'
+import PaymentForm from '../PaymentForm'
 import { Link } from 'react-router-dom'
 const steps = ['Shipping address', 'Payment details']
 
