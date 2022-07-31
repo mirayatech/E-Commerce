@@ -29,7 +29,8 @@ const AddressForm = ({ checkoutToken, test }) => {
     )
 
     setShippingCountries(countries)
-    setShippingCountry(Object.keys(countries)[0])
+    const givenShippingCountries = Object.keys(countries)[0]
+    setShippingCountry(givenShippingCountries)
   }
 
   const fetchSubdivisions = async (countryCode) => {
@@ -38,7 +39,8 @@ const AddressForm = ({ checkoutToken, test }) => {
     )
 
     setShippingSubdivisions(subdivisions)
-    setShippingSubdivision(Object.keys(subdivisions)[0])
+    const givenShippingSubdivisions = Object.keys(subdivisions)[0]
+    setShippingSubdivision(givenShippingSubdivisions)
   }
 
   const fetchShippingOptions = async (
