@@ -93,7 +93,13 @@ const Checkout = ({ cart, onCaptureCheckout, setCart }) => {
   return (
     <>
       <Container sx={{ marginTop: '30px' }}>
-        <Paper sx={{ padding: '30px', width: '600px', margin: 'auto' }}>
+        <Paper
+          sx={{
+            padding: '30px',
+            maxWidth: '700px',
+            margin: 'auto',
+          }}
+        >
           <Typography variant="h4" component="h1" align="center">
             Checkout
           </Typography>
