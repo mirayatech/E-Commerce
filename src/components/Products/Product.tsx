@@ -1,4 +1,3 @@
-import React from 'react'
 import { Typography } from '@mui/material'
 import {
   Card,
@@ -7,10 +6,26 @@ import {
   CardActions,
   IconButton,
 } from '@mui/material'
-
 import { AddShoppingCart } from '@mui/icons-material'
 
-const Product = ({ product, onAddToCart }) => {
+export type ProductType = {
+  id: string
+  name: string
+  image: {
+    url: string
+  }
+  price: {
+    formatted_with_symbol: string
+  }
+  description: string
+}
+
+type ProductProps = {
+  product: ProductType
+  onAddToCart: (productId: string, quantity: number) => Promise<void>
+}
+
+const Product = ({ product, onAddToCart }: ProductProps) => {
   return (
     <Card sx={{ height: 350 }}>
       <CardMedia
