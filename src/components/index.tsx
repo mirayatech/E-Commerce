@@ -1,4 +1,4 @@
-export { default as Navbar } from './Navbar/Navbar'
-export { default as Products } from './Products/Products'
-export { default as Cart } from './Cart/Cart'
-export { default as Checkout } from './CheckoutForm/Chekout/Checkout'
+export { Navbar } from './Navbar/Navbar'
+export { Products } from './Products/Products'
+export { Cart } from './Cart/Cart'
+export { Checkout } from './CheckoutForm/Checkout/Checkout'
