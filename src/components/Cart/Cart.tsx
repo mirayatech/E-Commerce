@@ -1,4 +1,5 @@
-import CartItem from './CartItem'
+import type { Cart as CartType } from '@chec/commerce.js/types/cart'
+
 import {
   Container,
   Button,
@@ -6,9 +7,10 @@ import {
   Grid,
   CircularProgress,
 } from '@mui/material'
-import { Cart as CartType } from '@chec/commerce.js/types/cart'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
+
+import CartItem from './CartItem'
 
 type CartProps = {
   cart: CartType

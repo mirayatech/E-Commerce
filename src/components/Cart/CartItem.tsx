@@ -1,3 +1,6 @@
+import type { Cart } from '@chec/commerce.js/types/cart'
+import type { LineItem } from '@chec/commerce.js/types/line-item'
+
 import {
   Typography,
   Button,
@@ -7,10 +10,7 @@ import {
   CardMedia,
   Container,
 } from '@mui/material'
-import { Cart } from '@chec/commerce.js/types/cart'
-
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { LineItem } from '@chec/commerce.js/types/line-item'
 
 type CartItemProps = {
   cart: Cart
