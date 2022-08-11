@@ -40,18 +40,6 @@ export const Cart = ({
     </Typography>
   )
 
-  // if (!cart.line_items.length) {
-  //   return (
-  //     <CircularProgress
-  //       sx={{
-  //         position: 'absolute',
-  //         top: '50%',
-  //         left: '50%',
-  //       }}
-  //     />
-  //   )
-  // }
-
   const renderCart = (
     <ThemeProvider theme={theme}>
       <Grid container spacing={3}>
