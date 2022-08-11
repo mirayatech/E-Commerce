@@ -1,5 +1,7 @@
-import { Product as ProductType } from '@chec/commerce.js/types/product'
+import type { Product as ProductType } from '@chec/commerce.js/types/product'
+
 import { Container, Grid, Typography } from '@mui/material'
+
 import Product from './Product'
 
 type ProductProps = {

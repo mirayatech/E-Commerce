@@ -1,14 +1,13 @@
-import React from 'react'
 import { Typography, Button, Divider, Container } from '@mui/material'
-import { commerce } from '../../library/commerce'
-
 import {
   Elements,
   CardElement,
   ElementsConsumer,
 } from '@stripe/react-stripe-js'
-
 import { loadStripe } from '@stripe/stripe-js'
+import React from 'react'
+
+import { commerce } from '../../library/commerce'
 import { Review } from './Review'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
@@ -17,7 +16,6 @@ const PaymentForm = ({
   checkoutToken,
   nextStep,
   backStep,
-  shippingData,
   setCart,
   onCaptureCheckout,
   timeout,

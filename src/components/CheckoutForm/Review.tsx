@@ -1,4 +1,5 @@
-import { CheckoutToken } from '@chec/commerce.js/types/checkout-token'
+import type { CheckoutToken } from '@chec/commerce.js/types/checkout-token'
+
 import { Typography, List, ListItem, ListItemText } from '@mui/material'
 
 type ReviewProps = {

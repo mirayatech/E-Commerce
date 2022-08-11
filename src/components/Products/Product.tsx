@@ -1,3 +1,6 @@
+import type { Product as ProductType } from '@chec/commerce.js/types/product'
+
+import { AddShoppingCart } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import {
   Card,
@@ -6,8 +9,6 @@ import {
   CardActions,
   IconButton,
 } from '@mui/material'
-import { AddShoppingCart } from '@mui/icons-material'
-import { Product as ProductType } from '@chec/commerce.js/types/product'
 
 type ProductProps = {
   product: ProductType

@@ -1,9 +1,11 @@
+import type { Cart } from '@chec/commerce.js/types/cart'
+import type { Product } from '@chec/commerce.js/types/product'
+
 import { useState, useEffect } from 'react'
-import { commerce } from './library/commerce'
-import { Cart } from '@chec/commerce.js/types/cart'
-import { Product } from '@chec/commerce.js/types/product'
-import { Products, Navbar, Cart as CartComponent, Checkout } from './components'
 import { Routes, Route } from 'react-router-dom'
+
+import { Products, Navbar, Cart as CartComponent, Checkout } from './components'
+import { commerce } from './library/commerce'
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>([] as Product[])

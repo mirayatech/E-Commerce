@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import {
   Paper,
   Stepper,
@@ -10,10 +9,12 @@ import {
   Button,
   Container,
 } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
 import { commerce } from '../../../library/commerce'
 import AdressForm from '../AdressForm'
 import PaymentForm from '../PaymentForm'
-import { Link } from 'react-router-dom'
 const steps = ['Shipping address', 'Payment details']
 
 export const Checkout = ({ cart, onCaptureCheckout, setCart }) => {
