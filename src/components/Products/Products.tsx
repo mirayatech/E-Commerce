@@ -1,13 +1,13 @@
-import { ProductType } from './Product'
+import { Product as ProductType } from '@chec/commerce.js/types/product'
 import { Container, Grid, Typography } from '@mui/material'
+import Product from './Product'
 
 type ProductProps = {
   products: ProductType[]
-  // Product: functinal-component,
   onAddToCart: (productId: string, quantity: number) => Promise<void>
 }
 
-const Products = ({ products, onAddToCart }: ProductProps) => {
+export const Products = ({ products, onAddToCart }: ProductProps) => {
   return (
     <Container
       sx={{
@@ -27,5 +27,3 @@ const Products = ({ products, onAddToCart }: ProductProps) => {
     </Container>
   )
 }
-
-export default Products
