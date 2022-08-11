@@ -1,7 +1,11 @@
-import React from 'react'
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token'
 import { Typography, List, ListItem, ListItemText } from '@mui/material'
 
-const Review = ({ checkoutToken }) => (
+type ReviewProps = {
+  checkoutToken: CheckoutToken
+}
+
+export const Review = ({ checkoutToken }: ReviewProps) => (
   <>
     <Typography variant="h6" component="h2" gutterBottom>
       Order summary
@@ -31,5 +35,3 @@ const Review = ({ checkoutToken }) => (
     </List>
   </>
 )
-
-export default Review
