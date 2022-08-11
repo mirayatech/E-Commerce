@@ -1,3 +1,6 @@
+import type { Cart } from '@chec/commerce.js/types/cart'
+import type { LineItem } from '@chec/commerce.js/types/line-item'
+
 import {
   Typography,
   Button,
@@ -7,20 +10,11 @@ import {
   CardMedia,
   Container,
 } from '@mui/material'
-
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-type CartType = {
-  item: {
-    image: {
-      url: string
-    }
-    name: string
-  }
-}
-
-type CartProps = {
-  cart: CartType
+type CartItemProps = {
+  cart: Cart
+  lineItem: LineItem
   onUpdateCartQty: (lineItemId: string, quantity: number) => Promise<void>
   onRemoveFromCart: (lineItemId: string) => Promise<void>
 }
@@ -32,21 +26,21 @@ const theme = createTheme({
   },
 })
 
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }: CartProps) => {
+const CartItem = ({
+  lineItem,
+  onUpdateCartQty,
+  onRemoveFromCart,
+}: CartItemProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Card>
-        <CardMedia
-          image={item.image.url}
-          alt={item.name}
-          sx={{ height: 260 }}
-        />
+        <CardMedia image={lineItem.image?.url} sx={{ height: 260 }} />
         <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5" component="h2">
-            {item.name}
+            {lineItem.name}
           </Typography>
           <Typography variant="h5" component="h2">
-            {item.line_total.formatted_with_symbol}
+            {lineItem.line_total.formatted_with_symbol}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'space-between' }}>
@@ -56,27 +50,33 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }: CartProps) => {
               type="button"
               size="small"
               color="primary"
-              onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+              onClick={() =>
+                onUpdateCartQty(lineItem.id, lineItem.quantity - 1)
+              }
             >
               -
             </Button>
-            <Typography component="h3">&nbsp;{item.quantity}&nbsp;</Typography>
+            <Typography component="h3">
+              &nbsp;{lineItem.quantity}&nbsp;
+            </Typography>
             <Button
               type="button"
               size="small"
               color="primary"
-              aria-label="increase"
-              onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+              aria-label={`Increase quantity of ${lineItem.name}`}
+              onClick={() =>
+                onUpdateCartQty(lineItem.id, lineItem.quantity + 1)
+              }
             >
               +
             </Button>
           </Container>
           <Button
-            aria-label="Remove"
+            aria-label={`Remove ${lineItem.name}`}
             variant="contained"
             type="button"
             color="secondary"
-            onClick={() => onRemoveFromCart(item.id)}
+            onClick={() => onRemoveFromCart(lineItem.id)}
           >
             Remove
           </Button>

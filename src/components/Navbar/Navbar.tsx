@@ -1,5 +1,5 @@
-import { AppBar, Toolbar, IconButton, Badge, Typography } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import { AppBar, Toolbar, IconButton, Badge, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -12,18 +12,9 @@ const theme = createTheme({
 
 type NavbarProps = {
   totalItems: number
-  // AppBar: {
-  //   position: string,
-  //   color: string,
-  //   core: string,
-  //   sx: {
-  //     boxShadow: string,
-  //     borderBottom: string
-  //   }
-  // }
 }
 
-const Navbar = ({ totalItems }: NavbarProps) => {
+export const Navbar = ({ totalItems }: NavbarProps) => {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
@@ -33,7 +24,6 @@ const Navbar = ({ totalItems }: NavbarProps) => {
         <AppBar
           position="sticky"
           color="primary"
-          core="inherit"
           sx={{
             boxShadow: 'none',
             borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
@@ -61,7 +51,7 @@ const Navbar = ({ totalItems }: NavbarProps) => {
               <div className="button">
                 <IconButton
                   component={Link}
-                  to="/Cart"
+                  to="/cart"
                   aria-label="Show cart items"
                   color="inherit"
                 >
@@ -77,5 +67,3 @@ const Navbar = ({ totalItems }: NavbarProps) => {
     </>
   )
 }
-
-export default Navbar

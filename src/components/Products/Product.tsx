@@ -1,3 +1,6 @@
+import type { Product as ProductType } from '@chec/commerce.js/types/product'
+
+import { AddShoppingCart } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import {
   Card,
@@ -6,19 +9,6 @@ import {
   CardActions,
   IconButton,
 } from '@mui/material'
-import { AddShoppingCart } from '@mui/icons-material'
-
-export type ProductType = {
-  id: string
-  name: string
-  image: {
-    url: string
-  }
-  price: {
-    formatted_with_symbol: string
-  }
-  description: string
-}
 
 type ProductProps = {
   product: ProductType
@@ -29,7 +19,7 @@ const Product = ({ product, onAddToCart }: ProductProps) => {
   return (
     <Card sx={{ height: 350 }}>
       <CardMedia
-        image={product.image.url}
+        image={product.image?.url}
         component="img"
         alt={product.name}
         title={product.name}
@@ -72,7 +62,7 @@ const Product = ({ product, onAddToCart }: ProductProps) => {
         }}
       >
         <IconButton
-          aria-label="Add to Cart"
+          aria-label={`Add ${product.name} to cart`}
           onClick={() => onAddToCart(product.id, 1)}
         >
           <AddShoppingCart />

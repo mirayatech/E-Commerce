@@ -1,22 +1,23 @@
+import type { Cart } from '@chec/commerce.js/types/cart'
+import type { Product } from '@chec/commerce.js/types/product'
+
 import { useState, useEffect } from 'react'
-import { commerce } from './library/commerce'
-import { Products, Navbar, Cart, Checkout } from './components'
 import { Routes, Route } from 'react-router-dom'
-import { ProductProps } from './components/Products/Products'
+
+import { Products, Navbar, Cart as CartComponent, Checkout } from './components'
+import { commerce } from './library/commerce'
 
 const App = () => {
-  const [products, setProducts] = useState<ProductProps[]>([])
-  const [cart, setCart] = useState({})
+  const [products, setProducts] = useState<Product[]>([] as Product[])
+  const [cart, setCart] = useState<Cart>({} as Cart)
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list()
     setProducts(data)
-    // array of objects
   }
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve())
-    // object
   }
 
   const handleAddToCart = async (productId: string, quantity: number) => {
@@ -40,8 +41,8 @@ const App = () => {
   }
 
   const handleCaptureCheckout = async (checkoutTokenId: object) => {
-    const incomingOrder = await commerce.checkout.capture(checkoutTokenId)
-    console.log(incomingOrder)
+    // @ts-ignore
+    await commerce.checkout.capture(checkoutTokenId)
   }
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const App = () => {
         <Route
           path="/cart"
           element={
-            <Cart
+            <CartComponent
               cart={cart}
               handleUpdateCartQty={handleUpdateCartQty}
               handleRemoveFromCart={handleRemoveFromCart}

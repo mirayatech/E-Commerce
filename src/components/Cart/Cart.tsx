@@ -1,4 +1,5 @@
-import CartItem from './CartItem'
+import type { Cart as CartType } from '@chec/commerce.js/types/cart'
+
 import {
   Container,
   Button,
@@ -9,29 +10,13 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 
-type CartType = {
-  line_items: [
-    item: {
-      image: {
-        url: string
-      }
-      id: string
-      name: string
-    }
-  ]
-  subtotal: {
-    formatted_with_symbol: string
-  }
-}
+import CartItem from './CartItem'
 
 type CartProps = {
   cart: CartType
   handleUpdateCartQty: (lineItemId: string, quantity: number) => Promise<void>
   handleRemoveFromCart: (lineItemId: string) => Promise<void>
   handleEmptyCart: () => Promise<void>
-  sx: {
-    textDecoration: string
-  }
 }
 
 const theme = createTheme({
@@ -41,7 +26,7 @@ const theme = createTheme({
   },
 })
 
-const Cart = ({
+export const Cart = ({
   cart,
   handleUpdateCartQty,
   handleRemoveFromCart,
@@ -54,14 +39,14 @@ const Cart = ({
       textAlign="center"
       mt="250px"
     >
-      You have no items in your shopping cart,{' '}
-      <Link sx={{ textDecoration: 'none' }} color="primary" to="/">
+      You have no items in your shopping cart,
+      <Link style={{ textDecoration: 'none' }} color="primary" to="/">
         start adding some.
       </Link>
     </Typography>
   )
 
-  if (!cart.line_items) {
+  if (!cart.line_items.length) {
     return (
       <CircularProgress
         sx={{
@@ -79,9 +64,10 @@ const Cart = ({
         {cart.line_items.map((lineItem) => (
           <Grid item xs={12} sm={4} key={lineItem.id}>
             <CartItem
-              item={lineItem}
+              lineItem={lineItem}
               onUpdateCartQty={handleUpdateCartQty}
               onRemoveFromCart={handleRemoveFromCart}
+              cart={cart}
             />
           </Grid>
         ))}
@@ -157,5 +143,3 @@ const Cart = ({
     </Container>
   )
 }
-
-export default Cart
