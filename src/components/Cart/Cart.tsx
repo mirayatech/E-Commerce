@@ -1,12 +1,6 @@
 import type { Cart as CartType } from '@chec/commerce.js/types/cart'
 
-import {
-  Container,
-  Button,
-  Typography,
-  Grid,
-  CircularProgress,
-} from '@mui/material'
+import { Container, Button, Typography, Grid } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 
@@ -46,17 +40,17 @@ export const Cart = ({
     </Typography>
   )
 
-  if (!cart.line_items.length) {
-    return (
-      <CircularProgress
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-        }}
-      />
-    )
-  }
+  // if (!cart.line_items.length) {
+  //   return (
+  //     <CircularProgress
+  //       sx={{
+  //         position: 'absolute',
+  //         top: '50%',
+  //         left: '50%',
+  //       }}
+  //     />
+  //   )
+  // }
 
   const renderCart = (
     <ThemeProvider theme={theme}>
