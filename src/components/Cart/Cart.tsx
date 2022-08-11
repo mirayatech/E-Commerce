@@ -1,4 +1,3 @@
-import React from 'react'
 import CartItem from './CartItem'
 import {
   Container,
@@ -9,6 +8,31 @@ import {
 } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
+
+type CartType = {
+  line_items: [
+    item: {
+      image: {
+        url: string
+      }
+      id: string
+      name: string
+    }
+  ]
+  subtotal: {
+    formatted_with_symbol: string
+  }
+}
+
+type CartProps = {
+  cart: CartType
+  handleUpdateCartQty: (lineItemId: string, quantity: number) => Promise<void>
+  handleRemoveFromCart: (lineItemId: string) => Promise<void>
+  handleEmptyCart: () => Promise<void>
+  sx: {
+    textDecoration: string
+  }
+}
 
 const theme = createTheme({
   palette: {
@@ -22,7 +46,7 @@ const Cart = ({
   handleUpdateCartQty,
   handleRemoveFromCart,
   handleEmptyCart,
-}) => {
+}: CartProps) => {
   const renderEmptyCart = (
     <Typography
       variant="subtitle1"
@@ -40,7 +64,6 @@ const Cart = ({
   if (!cart.line_items) {
     return (
       <CircularProgress
-        status="loading"
         sx={{
           position: 'absolute',
           top: '50%',
@@ -68,7 +91,6 @@ const Cart = ({
         sx={{
           mt: 10,
           display: 'flex',
-          width: '100%',
           justifyContent: 'space-between',
         }}
       >
@@ -84,7 +106,6 @@ const Cart = ({
         <Container
           sx={{
             display: 'flex',
-            width: 'auto',
             alignItems: 'center',
             justifyContent: 'flex-end',
           }}
@@ -96,7 +117,6 @@ const Cart = ({
             color="secondary"
             aria-label="Empty Cart"
             sx={{
-              minWidth: '150px',
               mb: 2,
               mr: 2,
             }}
@@ -113,7 +133,6 @@ const Cart = ({
             aria-label="Check Out"
             color="primary"
             sx={{
-              minWidth: '150px',
               mb: 2,
               mr: 2,
             }}

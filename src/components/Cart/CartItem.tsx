@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Typography,
   Button,
@@ -11,7 +10,21 @@ import {
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-// Color theme
+type CartType = {
+  item: {
+    image: {
+      url: string
+    }
+    name: string
+  }
+}
+
+type CartProps = {
+  cart: CartType
+  onUpdateCartQty: (lineItemId: string, quantity: number) => Promise<void>
+  onRemoveFromCart: (lineItemId: string) => Promise<void>
+}
+
 const theme = createTheme({
   palette: {
     primary: { main: '#212121' },
@@ -19,7 +32,7 @@ const theme = createTheme({
   },
 })
 
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }: CartProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Card>

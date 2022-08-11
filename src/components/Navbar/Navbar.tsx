@@ -1,4 +1,3 @@
-import React from 'react'
 import { AppBar, Toolbar, IconButton, Badge, Typography } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -11,7 +10,20 @@ const theme = createTheme({
   },
 })
 
-const Navbar = ({ totalItems }) => {
+type NavbarProps = {
+  totalItems: number
+  // AppBar: {
+  //   position: string,
+  //   color: string,
+  //   core: string,
+  //   sx: {
+  //     boxShadow: string,
+  //     borderBottom: string
+  //   }
+  // }
+}
+
+const Navbar = ({ totalItems }: NavbarProps) => {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
@@ -45,11 +57,6 @@ const Navbar = ({ totalItems }) => {
             >
               MyStore
             </Typography>
-            <div
-              sx={{
-                flexGrow: 1,
-              }}
-            />
             {isHome && (
               <div className="button">
                 <IconButton
