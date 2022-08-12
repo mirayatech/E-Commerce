@@ -1,8 +1,12 @@
 import { TextField, Grid } from '@mui/material'
-import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
 
-const FormInput = ({ name, label }) => {
+type FormInputProps = {
+  name: string
+  label: string
+}
+
+export const FormInput = ({ name, label }: FormInputProps) => {
   const { control } = useFormContext()
 
   return (
@@ -19,5 +23,3 @@ const FormInput = ({ name, label }) => {
     </>
   )
 }
-
-export default FormInput
