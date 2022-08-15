@@ -6,7 +6,7 @@ type FormInputProps = {
   label: string
 }
 
-export const FormInput = ({ name, label }: FormInputProps) => {
+const FormInput = ({ name, label }: FormInputProps) => {
   const { control } = useFormContext()
 
   return (
@@ -23,3 +23,4 @@ export const FormInput = ({ name, label }: FormInputProps) => {
     </>
   )
 }
+export default FormInput
