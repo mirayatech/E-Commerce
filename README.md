@@ -1,5 +1,6 @@
+## E-Commerce 
 
-A fully functional E-Commerce application built with react, TypeScript. More info coming soon...
+A fully functional E-Commerce application built with react, TypeScript 🛍️
 
 
 ## Dependencies 🛠️
